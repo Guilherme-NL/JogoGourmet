@@ -8,3 +8,17 @@ class Node {
     this.no = null;
   }
 }
+
+class Tree {
+  constructor() {
+    this.root = null;
+  }
+
+  addNode(node, parent = null, response = YES) {
+    if (!this.root) {
+      this.root = node;
+    } else if (parent) {
+      parent[response] = node;
+    }
+  }
+}
