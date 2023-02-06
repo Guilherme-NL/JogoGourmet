@@ -28,7 +28,16 @@ class Tree {
     }
   }
 
-  getUserInput() {
+  addInitialData() {
+    const massa = new Node("massa");
+    this.addNode(massa, null, YES);
+    const bolo = new Node("Bolo");
+    this.addNode(bolo, massa, NO);
+    const lasanha = new Node("lasanha");
+    this.addNode(lasanha, massa, YES);
+  }
+
+  startGameInput() {
     console.log("Pense em um prato que gosta");
     const response = prompt(
       "Digite " + chalk.yellow.underline.bold("ok") + " se estiver pronto! "
@@ -65,16 +74,16 @@ class Tree {
       const response = this.handleResponse(node);
       if (response === YES) {
         console.log(chalk.green("Acertei de novo!"));
-        this.getUserInput();
+        this.startGameInput();
       } else {
         this.handleNewDish(node);
-        this.getUserInput();
+        this.startGameInput();
       }
     } else if (!node.yes && node.no) {
       const response = this.handleResponse(node);
       if (response === YES) {
         console.log(chalk.green("Acertei de novo!"));
-        this.getUserInput();
+        this.startGameInput();
       } else {
         this.guessUserDish(node.no);
       }
@@ -84,7 +93,7 @@ class Tree {
         this.guessUserDish(node.yes);
       } else {
         this.handleNewDish(node);
-        this.getUserInput();
+        this.startGameInput();
       }
     } else {
       const response = this.handleResponse(node);
@@ -99,7 +108,8 @@ class Tree {
 
 function main() {
   let tree = new Tree();
-  tree.getUserInput();
+  tree.addInitialData();
+  tree.startGameInput();
 }
 
 main();
